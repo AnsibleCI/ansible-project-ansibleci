@@ -1,5 +1,8 @@
 ---
-output_dir: /local
+input_dir: /input
+
+output_dir: /output
+output_results_file: "{{ output_dir }}/results_{{ project.commitid }}.json"
 output_project_dir: "{{ output_dir }}/{{ project.name }}"
 output_project_commit_dir: "{{ output_project_dir }}/{{ project.commitid }}"
 output_ansiblelint_file: "{{ output_project_commit_dir }}/ansible-lint.html"

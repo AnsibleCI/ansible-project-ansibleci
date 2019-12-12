@@ -13,7 +13,7 @@
 <script>
 $(document).ready(function() {
     $('#ansible_lint_results').DataTable( {
-        "data": {{ lookup('file', '/local/results.json') }},
+        "data": {{ lookup('file', output_results_file) }},
         "columns": [
             { "data": "filename",
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {

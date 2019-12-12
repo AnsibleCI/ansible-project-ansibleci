@@ -1,11 +1,6 @@
 ---
-- name: Save ansible-lint result in '/local/results.json'
-  shell: cd /local && ansible-lint --parseable-json playbook_demo.yml > /local/results.json
-  register: command
-  failed_when: command.rc != 0 and command.rc != 2
-
 - name: Get commitid
-  shell: cd /local && git rev-parse HEAD
+  shell: cd {{ input_dir }} && git rev-parse HEAD
   register: reg_commitid
 
 - set_fact:
@@ -13,13 +8,16 @@
       url: https://github.com/AnsibleCI/ansible-role-demo
       name: ansible-role-demo
       commitid: "{{ reg_commitid.stdout }}"
+      
+- name: Save ansible-lint result in '{{ output_results_file }}'
+  shell: cd {{ input_dir }} && ansible-lint --parseable-json playbook_demo.yml > {{ output_results_file }}
+  register: command
+  failed_when: command.rc != 0 and command.rc != 2
 
 - name: "Create '{{ output_project_commit_dir }}' directory" 
   file:
     path: "{{ output_project_commit_dir }}"
     state: directory
-
-# {{ project.url }}/blob/master/{{ filename }}#{{ linenumber }}
 
 - name: Generate '{{ output_ansiblelint_file }}'
   template:
