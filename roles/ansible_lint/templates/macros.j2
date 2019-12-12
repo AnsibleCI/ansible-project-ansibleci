@@ -1,0 +1,7 @@
+{% macro link_commitid() %}
+<a href="{{ project.url }}/commit/{{ project.commitid }}">{{ project.commitid }}</a>
+{% endmacro %}
+
+{% macro link_project() %}
+<a href="{{ project.url }}">{{ project.name }}</a>
+{% endmacro %}

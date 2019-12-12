@@ -1,0 +1,36 @@
+<table id="ansible_lint_results" class="mdl-data-table" style="width:100%">
+    <thead>
+        <tr>
+            <th>Filename</th>
+            <th>Linenumber</th>
+            <th>Rule ID</th>
+            <th>Rule Title</th>
+            <th>Rule Description</th>
+            <th>Rule Severity</th>
+        </tr>
+    </thead>
+</table>
+<script>
+$(document).ready(function() {
+    $('#ansible_lint_results').DataTable( {
+        "data": {{ lookup('file', '/local/results.json') }},
+        "columns": [
+            { "data": "filename",
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<a href='{{ project.url }}/blob/{{ project.commitid }}/"+oData.filename+"#L"+oData.linenumber+"'>"+oData.filename+"</a>");
+        } },
+            { "data": "linenumber" },
+            { "data": "rule_id" },
+            { "data": "rule_title" },
+            { "data": "rule_description" },
+            { "data": "rule_severity" }
+        ],
+        "columnDefs": [
+            {
+                "targets": [ 0, 3, 4, 5 ],
+                "className": "mdl-data-table__cell--non-numeric"
+            }
+        ]
+    } );
+} );
+</script>

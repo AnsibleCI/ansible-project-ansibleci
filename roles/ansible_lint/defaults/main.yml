@@ -1,0 +1,5 @@
+---
+output_dir: /local
+output_project_dir: "{{ output_dir }}/{{ project.name }}"
+output_project_commit_dir: "{{ output_project_dir }}/{{ project.commitid }}"
+output_ansiblelint_file: "{{ output_project_commit_dir }}/ansible-lint.html"
