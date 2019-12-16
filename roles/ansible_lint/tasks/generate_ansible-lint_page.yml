@@ -9,7 +9,7 @@
       name: ansible-role-demo
       commitid: "{{ reg_commitid.stdout }}"
       
-- name: Save ansible-lint result in '{{ output_results_file }}'
+- name: Save ansible-lint results in '{{ output_results_file }}'
   shell: cd {{ input_dir }} && ansible-lint --parseable-json playbook_demo.yml > {{ output_results_file }}
   register: command
   failed_when: command.rc != 0 and command.rc != 2

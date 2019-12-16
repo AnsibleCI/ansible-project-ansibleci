@@ -1,0 +1,9 @@
+#
+# Generates an ansible-lint page
+#
+- name: Generate an ansible-lint page
+  hosts: localhost
+  gather_facts: no
+
+  roles:
+  - ansible_lint
